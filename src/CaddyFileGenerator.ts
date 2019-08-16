@@ -7,13 +7,15 @@ export function generateServerBlock(host: string, block: Block): string {
       if (directive.type === 'tls') {
         return `\ttls ${directive.certificate} ${directive.key}`;
       } else if (directive.type === 'proxy') {
-        return `\tproxy ${directive.from} ${directive.to}`;
+        return `\tproxy ${directive.from} ${directive.to}${directive.websocket ? ` {\n\twebsocket\n\t}` : ``}`;
       } else if (directive.type === 'basicauth') {
         if ('path' in directive) return `\tbasicauth ${directive.path} ${directive.username} ${directive.password}`;
         else
           return `\tbasicauth "${directive.username}" ${directive.password} {\n\t\trealm "${
             directive.realm
           }"\n\t${directive.files.map(file => `\t${file}`).join('\n\t')}\n\t}`;
+      } else if (directive.type === 'gzip') {
+        return `\tgzip`;
       }
     })
     .join('\n')}\n}`;

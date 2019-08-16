@@ -7,10 +7,11 @@ export interface CaddyFileType {
 export enum HTTPDirectiveTypes {
   'basicauth' = 'basicauth',
   'proxy' = 'proxy',
-  'tls' = 'tls'
+  'tls' = 'tls',
+  'gzip' = 'gzip'
 }
 
-export type HTTPDirectiveTypesType = 'basicauth' | 'proxy' | 'tls' | HTTPDirectiveTypes;
+export type HTTPDirectiveTypesType = 'basicauth' | 'proxy' | 'tls' | 'gzip' | HTTPDirectiveTypes;
 
 export interface Block {
   directives: DirectiveTypes[];
@@ -62,6 +63,16 @@ export interface TLSCoreDirective {
   key: string;
 }
 
+export interface GZIPCoreDirective {
+  type: 'gzip';
+}
+
+export interface GZIPMainDirective extends GZIPCoreDirective {
+  level: number;
+}
+
+export type GZIPDirective = GZIPCoreDirective | GZIPMainDirective
+
 export interface TLSDirective extends TLSCoreDirective {}
 
-export type DirectiveTypes = BasicAuthDirective | ProxyDirective | BasicAuthPathDirective | TLSDirective;
+export type DirectiveTypes = BasicAuthDirective | ProxyDirective | BasicAuthPathDirective | TLSDirective | GZIPDirective;

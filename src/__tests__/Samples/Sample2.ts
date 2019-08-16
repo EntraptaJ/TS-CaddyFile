@@ -5,7 +5,7 @@
 export const CaddyFileSample2 = `
 kristianjones.dev {
   tls /SSL/kristianjones.dev.pem /SSL/kristianjones.dev.key
-  proxy /fucker http://test-api  {
+  proxy /api http://test-api  {
     websocket
   }
 

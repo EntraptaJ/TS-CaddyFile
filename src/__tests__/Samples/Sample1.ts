@@ -35,5 +35,6 @@ basicauth username milkshakes {
   /another-file.txt
 }
 
+gzip
 
 proxy / localhost:8080`;

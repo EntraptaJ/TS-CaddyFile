@@ -1,7 +1,7 @@
 // src/Parser/Process/BasicAuth.ts
 import { BasicAuthDirective, BasicAuthPathDirective } from '../../types';
 
-const BasicAuthCoreExtract = /(?!basicauth)\s((.|\n)*)(?<!\})/;
+const BasicAuthCoreExtract = /(?!.*basicauth)\s((.|\n)*)(?<!\})/;
 const OtherBasicAuthExtract = /\s+?"?(?<username>.*(?<!")).*\s(?<password>\w+)\s\{((.|\n)*)realm\s"?(?<realm>.*(?<!")).*/gm;
 
 export function processBasicAuthDirective(directive: string): BasicAuthDirective | BasicAuthPathDirective {
@@ -10,7 +10,7 @@ export function processBasicAuthDirective(directive: string): BasicAuthDirective
   if (!core.match('\n'))
     return {
       type: 'basicauth',
-      ...((/(?!basicauth)\s(?<path>.*)\s(?<username>\S+)\s(?<password>\S+)/.exec(directive)
+      ...((/(?!.*basicauth)\s(?<path>.*)\s(?<username>\S+)\s(?<password>\S+)/.exec(directive)
         .groups as unknown) as BasicAuthPathDirective)
     };
 
@@ -20,6 +20,7 @@ export function processBasicAuthDirective(directive: string): BasicAuthDirective
     files: core
       .replace(OtherBasicAuthExtract, '')
       .replace(/\s+/, '')
+      .replace(/\t/, '')
       .split(/\n/)
       .filter(a => a.length > 0)
   };

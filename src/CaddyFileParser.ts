@@ -3,6 +3,7 @@ import { HTTPDirectiveTypes, DirectiveTypes, CaddyFile } from './types';
 import { processProxyDirective } from './Parser/Process/ProxyDirective';
 import { processBasicAuthDirective } from './Parser/Process/BasicAuth';
 import { ProcessTLSDirective } from './Parser/Process/TLS';
+import { processGZIP } from './Parser/Process/GZIP'
 
 const commentTest = /^#.*/;
 const textTest = /\S+(?<!\s{)/;
@@ -18,10 +19,11 @@ const directiveTest = new RegExp(
     .join('')})`
 );
 
-function extractDirective<T extends 'basicauth' | 'proxy' | 'tls'>(directive: T, directiveString: string): DirectiveTypes {
+function extractDirective<T extends 'basicauth' | 'proxy' | 'tls' | 'gzip'>(directive: T, directiveString: string): DirectiveTypes {
   if (directive === 'basicauth') return processBasicAuthDirective(directiveString);
   else if (directive === 'proxy') return processProxyDirective(directiveString);
   else if (directive === 'tls') return ProcessTLSDirective(directiveString);
+  else if (directive === 'gzip') return processGZIP(directiveString);
 }
 
 /**
