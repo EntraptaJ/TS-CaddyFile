@@ -2,6 +2,7 @@
 import { HTTPDirectiveTypes, DirectiveTypes, CaddyFile } from './types';
 import { processProxyDirective } from './Parser/Process/ProxyDirective';
 import { processBasicAuthDirective } from './Parser/Process/BasicAuth';
+import { ProcessTLSDirective } from './Parser/Process/TLS';
 
 const commentTest = /^#.*/;
 const textTest = /\S+(?<!\s{)/;
@@ -20,6 +21,7 @@ const directiveTest = new RegExp(
 function extractDirective<T extends 'basicauth' | 'proxy' | 'tls'>(directive: T, directiveString: string): DirectiveTypes {
   if (directive === 'basicauth') return processBasicAuthDirective(directiveString);
   else if (directive === 'proxy') return processProxyDirective(directiveString);
+  else if (directive === 'tls') return ProcessTLSDirective(directiveString);
 }
 
 /**

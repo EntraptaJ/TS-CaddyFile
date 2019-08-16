@@ -1,6 +1,9 @@
 // src/Parser/Process/TLS.ts
-import { TLSCoreDirective } from '../../types'
+import { TLSCoreDirective, TLSDirective } from '../../types';
 
-export function ProcessTLSDirective() {
+const TLSCoreExtract = /(?!\stls)\s(?<certificate>\S+)\s(?<key>\S+)(?<!{)/
 
+export function ProcessTLSDirective(directive: string): TLSDirective {
+  const core = (TLSCoreExtract.exec(directive).groups as unknown) as TLSCoreDirective;
+  return { ...core };
 }

@@ -48,8 +48,6 @@ export interface HTTPDirectives {
   proxy: ProxyDirective;
 }
 
-export type DirectiveTypes = BasicAuthDirective | ProxyDirective | BasicAuthPathDirective;
-
 export interface Directive {
   type: DirectiveTypes;
 }
@@ -59,6 +57,11 @@ export interface WebBlock {
 }
 
 export interface TLSCoreDirective {
-  type: 'tls',
-  
+  type: 'tls';
+  certificate: string;
+  key: string;
 }
+
+export interface TLSDirective extends TLSCoreDirective {}
+
+export type DirectiveTypes = BasicAuthDirective | ProxyDirective | BasicAuthPathDirective | TLSDirective;

@@ -6,11 +6,11 @@ describe('Parse CaddyFile', () => {
   test('CaddyFile without curly braces (Single Entry)', () => {
     const Test1OBJ = parseCaddyFile(CaddyFileSample1);
     // @ts-ignore
-    Object.entries(Test1OBJ).map(([stuff, { directives }]) => console.log(directives));
-    console.log(Test1OBJ);
+    // Object.entries(Test1OBJ).map(([stuff, { directives }]) => console.log(directives));
+    // console.log(Test1OBJ);
   });
   test('CaddyFile Curly Braces', () => {
     const Test2OBJ = parseCaddyFile(CaddyFileSample2);
-    console.log(Test2OBJ)
+    Object.entries(Test2OBJ).map(([stuff, { directives }]) => console.log(directives));
   })
 });
