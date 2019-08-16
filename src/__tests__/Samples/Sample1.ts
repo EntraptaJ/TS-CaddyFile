@@ -37,4 +37,6 @@ basicauth username milkshakes {
 
 gzip
 
+bind 1.1.1.1
+
 proxy / localhost:8080`;

@@ -8,10 +8,11 @@ export enum HTTPDirectiveTypes {
   'basicauth' = 'basicauth',
   'proxy' = 'proxy',
   'tls' = 'tls',
-  'gzip' = 'gzip'
+  'gzip' = 'gzip',
+  'bind' = 'bind'
 }
 
-export type HTTPDirectiveTypesType = 'basicauth' | 'proxy' | 'tls' | 'gzip' | HTTPDirectiveTypes;
+export type HTTPDirectiveTypesType = 'basicauth' | 'proxy' | 'tls' | 'gzip' | 'bind' | HTTPDirectiveTypes;
 
 export interface Block {
   directives: DirectiveTypes[];
@@ -75,4 +76,9 @@ export type GZIPDirective = GZIPCoreDirective | GZIPMainDirective
 
 export interface TLSDirective extends TLSCoreDirective {}
 
-export type DirectiveTypes = BasicAuthDirective | ProxyDirective | BasicAuthPathDirective | TLSDirective | GZIPDirective;
+export interface BINDDirective {
+  type: 'bind';
+  host: string;
+}
+
+export type DirectiveTypes = BasicAuthDirective | ProxyDirective | BasicAuthPathDirective | TLSDirective | GZIPDirective | BINDDirective;

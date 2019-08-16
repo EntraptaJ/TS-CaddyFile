@@ -16,7 +16,7 @@ export function generateServerBlock(host: string, block: Block): string {
           }"\n\t${directive.files.map(file => `\t${file}`).join('\n\t')}\n\t}`;
       } else if (directive.type === 'gzip') {
         return `\tgzip`;
-      }
+      } else if (directive.type === 'bind') return `\tbind ${directive.host}`;
     })
     .join('\n')}\n}`;
 }

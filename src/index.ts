@@ -1,2 +1,3 @@
 // src/index.ts
-export * from './CaddyFileParser';
+export { parseCaddyFile } from './CaddyFileParser';
+export { generateCaddyFile } from './CaddyFileGenerator';

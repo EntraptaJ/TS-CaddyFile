@@ -1,9 +1,9 @@
 // src/__tests__/CaddyFileParser.test.ts
-import { parseCaddyFile } from "../index";
-import { CaddyFileSample1, CaddyFileSample2 } from "./Samples";
+import { parseCaddyFile } from '../index';
+import { CaddyFileSample1, CaddyFileSample2 } from './Samples';
 
-describe("Parse CaddyFile", () => {
-  test("CaddyFile without curly braces (Single Entry)", () => {
+describe('Parse CaddyFile', () => {
+  test('CaddyFile without curly braces (Single Entry)', () => {
     const Caddyfile = parseCaddyFile(CaddyFileSample1);
     expect(Caddyfile).toMatchInlineSnapshot(`
       Object {
@@ -47,6 +47,10 @@ describe("Parse CaddyFile", () => {
               "type": "gzip",
             },
             Object {
+              "host": "1.1.1.1",
+              "type": "bind",
+            },
+            Object {
               "from": "/",
               "to": "localhost:8080",
               "type": "proxy",
@@ -57,26 +61,26 @@ describe("Parse CaddyFile", () => {
       }
     `);
   });
-  test("CaddyFile Curly Braces", () => {
+  test('CaddyFile Curly Braces', () => {
     const Caddyfile = parseCaddyFile(CaddyFileSample2);
     expect(Caddyfile).toMatchInlineSnapshot(`
-      Object {
-        "kristianjones.dev": Object {
-          "directives": Array [
             Object {
-              "certificate": "/SSL/kristianjones.dev.pem",
-              "key": "/SSL/kristianjones.dev.key",
-              "type": "tls",
-            },
-            Object {
-              "from": "/api",
-              "to": "http://test-api",
-              "type": "proxy",
-              "websocket": true,
-            },
-          ],
-        },
-      }
-    `);
+              "kristianjones.dev": Object {
+                "directives": Array [
+                  Object {
+                    "certificate": "/SSL/kristianjones.dev.pem",
+                    "key": "/SSL/kristianjones.dev.key",
+                    "type": "tls",
+                  },
+                  Object {
+                    "from": "/api",
+                    "to": "http://test-api",
+                    "type": "proxy",
+                    "websocket": true,
+                  },
+                ],
+              },
+            }
+        `);
   });
 });
