@@ -1,7 +1,7 @@
 {
   "name": "ts-caddyfile",
   "version": "0.0.1",
-  "description": "CaddyFile Parser and generator",
+  "description": "CaddyFile Parser and generator VERY WIP",
   "main": "lib/index.js",
   "files": [
     "lib/**/*"
